@@ -133,8 +133,11 @@ class GraphLoader:
             # Copy node features if available
             if hasattr(train_data, 'x') and train_data.x is not None:
                 subgraph_data.x = train_data.x[nodes]
+                # Chuyển subgraph_data về cùng device với train_data
+            subgraph_data = subgraph_data.to(train_data.x.device)
 
-            subgraphs.append(subgraph_data)
+        subgraphs.append(subgraph_data)
+
 
         return subgraphs
 
